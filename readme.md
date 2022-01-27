@@ -16,7 +16,7 @@ Generates pure HTML, you may want to style it, otherwise you get a ordered list 
 
 2. In your Wordpress installation, within the admin area, sidebar `Plugins` > `Installed Plugins` > `Add New` and upload the the ZIP from step 1.
 3. Create a new `Elementor Page`, use the search and type `File List`, drag that widget to our main area.
-4. Configure your path - read the `Recommendations` bwelow !
+4. Configure your path - read the `Recommendations` below !
 
 ## HTML hirachy
 
