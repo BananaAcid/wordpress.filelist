@@ -12,7 +12,8 @@ Generates pure HTML, you may want to style it, otherwise you get a ordered list 
 ## Installation
 
 1. Click the green `Code` button, then on `Download ZIP`.
-    ![image](https://user-images.githubusercontent.com/1894723/151415902-9929197b-c1e2-4cb9-92f5-979053e91b3a.png)
+    <br><img src="https://user-images.githubusercontent.com/1894723/151415902-9929197b-c1e2-4cb9-92f5-979053e91b3a.png" style="max-width: 100%; width: 300px;" />
+
 2. In your Wordpress installation, within the admin area, sidebar `Plugins` > `Installed Plugins` > `Add New` and upload the the ZIP from step 1.
 3. Create a new `Elementor Page`, use the search and type `File List`, drag that widget to our main area.
 4. Configure your path - read the `Recommendations` bwelow !
