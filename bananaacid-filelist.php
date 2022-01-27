@@ -59,7 +59,7 @@ class BFL_init
         if (is_admin())
         {
             $plugin_data = get_file_data(__FILE__, array('Version' => 'Version'), false);
-            $this->initUpdateCheck( $plugin_data['Version'], $plugin_basename, plugin_basename( __FILE__ ), plugin_basename( __DIR__ ), BFL_UPDATE_URL);
+            $this->initUpdateCheck( $plugin_data['Version'], BFL_BASENAME, plugin_basename( __FILE__ ), plugin_basename( __DIR__ ), BFL_UPDATE_URL);
         }
     }
 
