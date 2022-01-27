@@ -218,7 +218,7 @@ class BFL_Elementor extends \Elementor\Widget_Base
 
 
         $forceDownload = $settings['forceDownload'] == 'yes';
-        $pathPrefix = $settings['pathPrefix'];
+        $pathPrefix = $settings['pathPrefix'] ? $settings['pathPrefix'] : '/';
         $debug = $settings['debug'] == 'yes';
         
 
