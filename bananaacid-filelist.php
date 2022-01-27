@@ -3,38 +3,64 @@
  * Plugin Name: File List
  * Plugin URI: https://github.com/BananaAcid/wordpress.filelist
  * Description: Elementor plugin to generate a file list from an existing folder and rendering `.index.html` files as headers.
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: Nabil Redmann, Virally.de
  * Author URI: http://virally.de
  */
 
-// Exit if accessed directly
 defined('ABSPATH') or die('Can\'t do.');
 
-if(!defined('BFL_DIR')) {
-    define ('BFL_DIR', dirname( __FILE__ )); // plugin dir
+
+if (!defined('BFL_DIR')) {
+     define ('BFL_DIR', dirname( __FILE__ )); // plugin dir
 }
-if(!defined('BFL_URL')) {
-    define ('BFL_URL', plugin_dir_url( __FILE__ )); // plugin url
+if (!defined('BFL_URL')) {
+     define ('BFL_URL', plugin_dir_url( __FILE__ )); // plugin url
 }
-if(!defined('BFL_DISPLAYNAME')) {
-    define ('BFL_DISPLAYNAME', 'File List' ); // plugin display name
+if (!defined('BFL_DISPLAYNAME')) {
+     define ('BFL_DISPLAYNAME', 'File List' ); // plugin display name
 }
-if(!defined('BFL_BASENAME')) {
-    define ('BFL_BASENAME', 'bananaacid-filelist'); // plugin base name
+if (!defined('BFL_BASENAME')) {
+     define ('BFL_BASENAME', 'bananaacid-filelist'); // plugin base name for update
 }
-if(!defined('BFL_ADMIN')) {
-    define ('BFL_ADMIN', BFL_DIR . '/inc/admin'); // plugin admin dir
+if (!defined('BFL_ADMIN')) {
+     define ('BFL_ADMIN', BFL_DIR . '/inc/admin'); // plugin admin dir
+}
+
+if (!defined('BFL_UPDATE_URL')) {
+    if (!isset($_GET['BFL_UPDATE_LOCAL']))
+    { 
+        define ('BFL_UPDATE_URL', 'https://raw.githubusercontent.com/BananaAcid/wordpress.filelist/main/info.json'); // plugins update info url
+    }
+    else
+    {
+        //TEST
+        define ('BFL_UPDATE_URL', BFL_URL . '/info.json');
+    }
 }
 
 
-class BFL
+require_once(BFL_DIR . '/inc/misha-update-checker.trait.php');
+
+
+
+class BFL_init
 {
+    use mishaUpdateCheckerTrait;
+
     function __construct()
     {
         add_action( 'elementor/widgets/register', [$this, 'register_widget'] );
 
-        add_action( 'plugins_loaded', [$this, 'plugins_loaded'] );
+        add_action( 'plugins_loaded', [$this, 'check_dependencies'] );
+
+        
+        // update checker
+        if (is_admin())
+        {
+            $plugin_data = get_file_data(__FILE__, array('Version' => 'Version'), false);
+            $this->initUpdateCheck( $plugin_data['Version'], $plugin_basename, plugin_basename( __FILE__ ), plugin_basename( __DIR__ ), BFL_UPDATE_URL);
+        }
     }
 
     function register_widget($widgets_manager)
@@ -45,7 +71,7 @@ class BFL
     }
 
 
-    function plugins_loaded()
+    function check_dependencies()
     {
         if (!did_action( 'elementor/loaded'))
         {
@@ -81,4 +107,4 @@ class BFL
 
 }
 
-new BFL();
+new BFL_init();

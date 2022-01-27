@@ -49,11 +49,14 @@ Add a `.htaccess` and a `.htpasswd` to trigger a Basic Auth password dialog when
 This plugin does nothing special to the files, just genertes the link, so any other plugin protecting files would work (you might need to configure the path-prefix). 
 
 ## Changes
-1.0.1
+#### 1.0.2
+- added update (experimental)
+
+#### 1.0.1
 - fixed url path being wrong
 - added Elementor requirement info
 - fixed typos to what was intended
 - added more info to the readme
 
-1.0.0
-inital.
+#### 1.0.0
+- inital.

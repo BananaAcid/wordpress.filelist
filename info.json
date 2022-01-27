@@ -1,0 +1,21 @@
+{
+    "name": "File List",
+    "slug": "wordpress.filelist",
+    "author": "<a href=\"http://virally.de\">Nabil Redmann</a>",
+    "author_profile": "http://virally.de",
+    "version": "1.0.2",
+    "download_url": "https://github.com/BananaAcid/wordpress.filelist/archive/refs/heads/main.zip",
+    "requires": "3.0",
+    "tested": "5.9",
+    "requires_php": "5.3",
+    "last_updated": "2022-01-27 15:30:00",
+    "sections": {
+        "description": "Elementor plugin to generate a file list from an existing folder and rendering `.index.html` files as headers.",
+        "installation": "Click the Install Now button",
+        "changelog": "<h4>1.0.2</h4> <ul> <li>added update</li> </ul> <h4>1.0.1</h4> <ul> <li>fixed url path being wrong</li> <li>added Elementor requirement info</li> <li>fixed typos to what was intended</li> <li>added more info to the readme</li> </ul> <h4>1.0.0</h4> <ul> <li>inital.</li> </ul>"
+    },
+    "banners": {
+        "low": "https://rudrastyh.com/wp-content/uploads/updater/banner-772x250.jpg",
+        "high": "https://rudrastyh.com/wp-content/uploads/updater/banner-1544x500.jpg"
+    }
+}
