@@ -63,7 +63,7 @@ This plugin does nothing special to the files, just genertes the link, so any ot
 
 #### 1.0.2
 
-- added update (experimental)
+- added update functionality
 
 #### 1.0.1
 
