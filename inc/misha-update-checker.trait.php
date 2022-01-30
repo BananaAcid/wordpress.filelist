@@ -30,7 +30,7 @@ if( ! trait_exists( 'mishaUpdateCheckerTrait' , false) ) {
 			$this->plugin_slug = $plugin_basename_dir; // plugin_basename( __DIR__ );
 			$this->version = $version;
 			$this->cache_key = 'misha_custom_upd_' . $plugin_basename;
-			$this->cache_allowed = false;
+			$this->cache_allowed = true;
 
 			add_filter( 'plugins_api', array( $this, 'info' ), 20, 3 );
 			add_filter( 'site_transient_update_plugins', array( $this, 'update' ) );
@@ -61,7 +61,7 @@ if( ! trait_exists( 'mishaUpdateCheckerTrait' , false) ) {
 					return false;
 				}
 
-				set_transient( $this->cache_key, $remote, DAY_IN_SECONDS );
+				set_transient( $this->cache_key, $remote,  MINUTE_IN_SECONDS * 5); // DAY_IN_SECONDS
 
 			}
 

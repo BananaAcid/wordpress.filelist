@@ -3,7 +3,7 @@
  * Plugin Name: File List
  * Plugin URI: https://github.com/BananaAcid/wordpress.filelist
  * Description: Elementor plugin to generate a file list from an existing folder and rendering `.index.html` files as headers.
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: Nabil Redmann, Virally.de
  * Author URI: http://virally.de
  */

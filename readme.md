@@ -1,6 +1,6 @@
 # File List - Wordpress/Elementor Plugin
 
-![image](https://user-images.githubusercontent.com/1894723/151361189-dd7c119d-262a-4f3e-a845-466e8236280f.png)
+![image](https://user-images.githubusercontent.com/1894723/151682201-c1d89c96-889c-42b3-bc1c-d2e56d117613.png)
 
 
 Elementor plugin to generate a file list from an existing folder and rendering `.index.html` files as headers.
@@ -28,8 +28,10 @@ Generates pure HTML, you may want to style it, otherwise you get a ordered list 
             li
                 a
                     span.name
-                    span.sep
+                    span.sep.no1
                     span.size
+                    span.sep.no2
+                    span.changed
                     small.debug  / if debug is enabled
             ...
 
@@ -60,6 +62,11 @@ Add a `.htaccess` and a `.htpasswd` to trigger a Basic Auth password dialog when
 This plugin does nothing special to the files, just genertes the link, so any other plugin protecting files would work (you might need to configure the path-prefix). 
 
 ## Changes
+
+#### 1.0.3
+
+- added file change date
+- added caching for update checks
 
 #### 1.0.2
 

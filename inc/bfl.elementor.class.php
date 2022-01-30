@@ -125,7 +125,7 @@ class BFL_Elementor extends \Elementor\Widget_Base
         );
 
         $this->add_control(
-            'forceDownload',
+            'force-download',
             [
                 'label' => esc_html__('Links as downloads', 'BFL'),
                 'description' => esc_html__('All files will trigger a file download, instead of showing in a popup or new window', 'BFL'),
@@ -138,12 +138,25 @@ class BFL_Elementor extends \Elementor\Widget_Base
         );
 
         $this->add_control(
-            'important_note',
+            'important-note',
             [
                 'label' => __('<b>Info</b>', 'BFL'),
                 'type' => \Elementor\Controls_Manager::RAW_HTML,
                 'raw' => __('To protect a file or folder, use a <code>.htaccess</code> file. If there is a <code>.index.html</code> it will be shown.', 'BFL'),
                 //'content_classes' => 'your-class',
+            ]
+        );
+
+
+        $this->add_control(
+            'date-format',
+            [
+                'label' => esc_html__('Date format', 'BFL'),
+                'description' => esc_html__('Format to show the last modified date on files. For the correct display, change the letters arround "Y-m-d H:i:s". To hide it, add the following custom css: `selector .changed, selector .sep.no2 { display: none; }`', 'BFL'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'input_type' => 'text',
+                'placeholder' => 'Y-m-d H:i:s',
+                'default' => 'Y-m-d H:i:s',
             ]
         );
 
@@ -192,6 +205,34 @@ class BFL_Elementor extends \Elementor\Widget_Base
     }
 
     /**
+     * Get correct m-time for any OS
+     * 
+     * @see https://www.php.net/manual/de/function.filemtime.php#100692
+     * @since 1.0.2
+     * @access protected
+     */
+    function getCorrectMTime($filePath, $format = 'Y-m-d H:i:s')
+    {
+        $time = filemtime($filePath);
+
+        $isDST = (date('I', $time) == 1);
+        $systemDST = (date('I') == 1);
+
+        $adjustment = 0;
+
+        if($isDST == false && $systemDST == true)
+            $adjustment = 3600;
+    
+        else if($isDST == true && $systemDST == false)
+            $adjustment = -3600;
+
+        else
+            $adjustment = 0;
+
+        return date($format, ($time + $adjustment));
+    }
+
+    /**
      * Render widget output on the frontend.
      *
      * Written in PHP and used to generate the final HTML.
@@ -217,9 +258,10 @@ class BFL_Elementor extends \Elementor\Widget_Base
         }
 
 
-        $forceDownload = $settings['forceDownload'] == 'yes';
+        $forceDownload = $settings['force-download'] == 'yes';
         $pathPrefix = $settings['pathPrefix'] ? $settings['pathPrefix'] : '/';
         $debug = $settings['debug'] == 'yes';
+        $dateFormat = esc_html__($settings['date-format'] ? $settings['date-format'] : 'Y-m-d H:i:s');
         
 
         $files = glob($path . '/?*.?*');
@@ -243,12 +285,13 @@ class BFL_Elementor extends \Elementor\Widget_Base
             $uri = str_replace(get_home_path(), $pathPrefix, $filepath);
             $name = basename($filepath);
             $size = $this->humanFileSize(filesize($filepath));
+            $changed =  $this->getCorrectMTime($filepath, $dateFormat);
             $download = $forceDownload ? ' download ' : '';
             $info = $debug ? "<br><small class=\"debug\"><br/>REAL: {$filepath}</small>" : '';
             $info .= $debug ? "<br><small class=\"debug\"><br/>LINK: {$uri}</small>" : '';
 
             $line = <<<EOB
-                <li><a href="{$uri}" {$download}><span class="name">{$name}</span><span class="sep"> &mdash; </span><span class="size">{$size}</span></a>{$info}</li>
+                <li><a href="{$uri}" {$download}><span class="name">{$name}</span><span class="sep no1"> &mdash; </span><span class="size">{$size}</span><span class="sep no2"> &mdash; </span><span class="changed">{$changed}</span></a>{$info}</li>
 EOB;
             print trim($line);
         }
