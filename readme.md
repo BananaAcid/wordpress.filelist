@@ -18,7 +18,9 @@ Generates pure HTML, you may want to style it, otherwise you get a ordered list 
 3. Create a new `Elementor Page`, use the search and type `File List`, drag that widget to our main area.
 4. Configure your path - read the `Recommendations` below !
 
-## HTML hirachy
+## HTML selector hirachy
+
+You can add your style in the custom style area of the element. The following elements and classes are used
 
 ```
     div.bfl-filelist
@@ -53,13 +55,17 @@ If you have your files elsewhere, link (symlink/haedlink - what ever your system
 
 This also keeps the files in reach for the download link to work.
 
-### protect files with a password
+### Protect files with a password
 
 If you need to protect your folder or any specific file or filetype with a password, and you are using apache:
 
 Add a `.htaccess` and a `.htpasswd` to trigger a Basic Auth password dialog when accessing it.
 
 This plugin does nothing special to the files, just genertes the link, so any other plugin protecting files would work (you might need to configure the path-prefix). 
+
+## Updates
+
+Automatic updates are supported using this repo. Just install the plugin first.
 
 ## Changes
 
